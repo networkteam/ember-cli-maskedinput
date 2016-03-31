@@ -1,3 +1,29 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Ember masked-input</h2>
+
+<h3>Examples</h3>
+
+<pre>
+  &#123;&#123;masked-input mask='{{pattern}}' value=someValue on-change=(action 'valueChanged')&#125;&#125;
+</pre>
+
+<h4>Pattern:</h4>
+
+<pre>{{input value=pattern}}</pre>
+
+<h4>Input:</h4>
+
+{{masked-input mask=pattern value=value0 on-change=(action 'value0Changed')}}
+
+<h4>Bound Value:</h4>
+
+<pre>{{value0}}</pre>
+
+<h4>Changes:</h4>
+
+<ul>
+{{#each value0Changes as |change|}}
+  <li><pre>{{change}}</pre></li>
+{{/each}}
+</ul>
 
 {{outlet}}

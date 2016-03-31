@@ -1,7 +1,7 @@
 {
   "name": "ember-maskedinput",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "Lightweight masked input fields without jQuery based on inputmask-core",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,15 +11,16 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/networkteam/ember-maskedinput",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Christopher Hlubek",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "0.7.1",
+    "ember-browserify": "1.1.8",
     "ember-cli": "2.4.2",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
@@ -43,7 +44,11 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.5"
+    "ember-cli-babel": "^5.1.5",
+    "inputmask-core": "^2.1.1",
+    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-stew": "^0.2.1",
+    "broccoli-templater": "0.0.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
