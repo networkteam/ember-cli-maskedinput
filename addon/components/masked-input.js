@@ -20,7 +20,7 @@ const PROTECTED_ATTRS = ['change', 'keyDown', 'keyPress', 'paste'];
 export default Ember.TextField.extend({
   mask: null,
   formatCharacters: null,
-  placeholderChar: null,
+  placeholderChar: '_',
 
   'on-change': Ember.K,
 

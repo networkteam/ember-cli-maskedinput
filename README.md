@@ -1,26 +1,58 @@
-# Ember-maskedinput
+# Ember masked-input
 
-This README outlines the details of collaborating on this Ember addon.
+This addon provides a `{{masked-input}}` helper that extends `{{input}}` (`Ember.TextField`) and applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
+
+There are no dependencies on jQuery plugins so this addon is a more lightweight and faster alternative to other input masking addons.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+```
+ember install ember-maskedinput
+```
 
-## Running
+## Usage
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+**Date pattern with bound value**
 
-## Running Tests
+```
+{{masked-input mask='11/11/1111' value=myBoundValue}}
+```
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+**Credit card pattern with closure action**
 
-## Building
+```
+{{masked-input mask='1111 1111 1111 1111' on-change=(action (mut value1) value='target.value')}}
+```
 
-* `ember build`
+**Time pattern with validation**
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+Uses plain HTML5 validation.
+
+```
+{{masked-input mask='11:11:11' required=true pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS'}}
+```
+
+## Reference
+
+### `mask`
+
+A pattern consisting of `1` (number), `a` (letter), `A` (letter forced upper case), `*` (alphanumeric), `#` (alphanumeric forced upper case) or any other character for static parts of the mask. Use backslashes to escape format characters.
+
+See [inputmask-core docs](https://github.com/insin/inputmask-core#pattern) for more information.
+
+### `formatCharacters`
+
+An object defining additional format characters, see [inputmask-core docs](https://github.com/insin/inputmask-core#formatcharacters) for more information.
+
+### `placeholderChar`
+
+The character which is used to fill in editable positions that have no input. Defaults to `_`; must be a single character.
+
+### `on-change`
+
+An optional action closure to handle the `change` event (which should not be overridden).
+
+
+## License
+
+[MIT Licensed](LICENSE.md)

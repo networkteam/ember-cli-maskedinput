@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/networkteam/ember-maskedinput",
+  "repository": "networkteam/ember-maskedinput",
   "engines": {
     "node": ">= 0.10.0"
   },
