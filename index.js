@@ -17,7 +17,7 @@ function expand(input) {
 }
 
 module.exports = {
-  name: 'ember-maskedinput',
+  name: 'ember-cli-maskedinput',
 
   treeForVendor: function(tree) {
     var modulePath = require.resolve('inputmask-core');

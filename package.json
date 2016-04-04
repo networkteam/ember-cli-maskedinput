@@ -1,5 +1,5 @@
 {
-  "name": "ember-maskedinput",
+  "name": "ember-cli-maskedinput",
   "version": "0.1.0",
   "description": "Lightweight masked input fields without jQuery based on inputmask-core",
   "directories": {
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "networkteam/ember-maskedinput",
+  "repository": "networkteam/ember-cli-maskedinput",
   "engines": {
     "node": ">= 0.10.0"
   },

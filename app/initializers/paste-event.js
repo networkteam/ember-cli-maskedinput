@@ -1,1 +1,1 @@
-export { default, initialize } from 'ember-maskedinput/initializers/paste-event';
+export { default, initialize } from 'ember-cli-maskedinput/initializers/paste-event';

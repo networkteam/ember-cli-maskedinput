@@ -2,12 +2,12 @@
 
 This addon provides a `{{masked-input}}` helper that extends `{{input}}` (`Ember.TextField`) and applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
 
-There are no dependencies on jQuery plugins so this addon is a more lightweight and faster alternative to other input masking addons.
+There are **no dependencies on jQuery plugins** so this addon is a more lightweight and faster alternative to other input masking addons. It's based on the solid [inputmask-core](https://github.com/insin/inputmask-core) library and adapted from its React implementation [MaskedInput](https://github.com/insin/react-maskedinput).
 
 ## Installation
 
 ```
-ember install ember-maskedinput
+ember install ember-cli-maskedinput
 ```
 
 ## Usage

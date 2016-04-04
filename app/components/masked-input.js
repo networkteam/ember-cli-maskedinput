@@ -1,1 +1,1 @@
-export { default } from 'ember-maskedinput/components/masked-input';
+export { default } from 'ember-cli-maskedinput/components/masked-input';
