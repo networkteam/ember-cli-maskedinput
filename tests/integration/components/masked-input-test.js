@@ -53,3 +53,9 @@ test('it clears masked characters with backspace', function(assert) {
 
   assert.equal(this.$('input').val(), '12:__');
 });
+
+test('it sets the display from an initial value given to InputMask', function(assert) {
+  this.render(hbs`{{masked-input mask='11:11' value='2222'}}`);
+
+  assert.equal(this.$('input').val(), '22:22');
+});
