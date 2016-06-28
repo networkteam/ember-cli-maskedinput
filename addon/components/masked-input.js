@@ -34,6 +34,11 @@ export default Ember.TextField.extend({
     });
   }),
 
+  applyMaskToInitialValue: Ember.on('didInsertElement', function() {
+    const el = this.get('element');
+    el.value = this._getDisplayValue();
+  }),
+
   _inputMask: Ember.computed('mask', 'value', 'formatCharacters', 'placeholderChar', function() {
     let options = {
       pattern: this.get('mask'),
@@ -76,11 +81,6 @@ export default Ember.TextField.extend({
     const mask = this.get('_inputMask');
     const value = mask.getValue();
     return value === mask.emptyValue ? '' : value;
-  },
-
-  didInsertElement() {
-    this._super(...arguments);
-    if (this.get('value')) { this.get('element').value = this._getDisplayValue(); }
   },
 
   change(e) {
