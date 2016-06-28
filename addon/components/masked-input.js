@@ -78,6 +78,11 @@ export default Ember.TextField.extend({
     return value === mask.emptyValue ? '' : value;
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+    if (this.get('value')) { this.get('element').value = this._getDisplayValue(); }
+  },
+
   change(e) {
     const mask = this.get('_inputMask');
     const maskValue = mask.getValue()
