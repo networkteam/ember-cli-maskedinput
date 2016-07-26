@@ -2,7 +2,7 @@ import Ember from 'ember';
 import InputMask from 'inputmask-core';
 import { getSelection, setSelection } from '../util/selection';
 
-const { on, computed, TextField, run: { next } } = Ember;
+const { computed, TextField, run: { next } } = Ember;
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -27,7 +27,8 @@ export default TextField.extend({
     return this;
   },
 
-  validateAttrs: on('init', function() {
+  init() {
+    this._super(...arguments);
     PROTECTED_ATTRS.forEach((key) => {
       if (this.attrs[key]) {
         if (console && console.warn) {
@@ -35,12 +36,13 @@ export default TextField.extend({
         }
       }
     });
-  }),
+  },
 
-  applyMaskToInitialValue: on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
     let el = this.get('element');
     el.value = this._getDisplayValue();
-  }),
+  },
 
   _inputMask: computed('mask', 'value', 'formatCharacters', 'placeholderChar', function() {
     let options = {
