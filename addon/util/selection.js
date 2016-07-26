@@ -33,7 +33,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 export function getSelection(input) {
-  var selection;
+  let selection;
   if ('selectionStart' in input) {
     // Modern browser with input or textarea.
     selection = {
@@ -42,7 +42,7 @@ export function getSelection(input) {
     };
   } else if (document.selection && input.nodeName === 'INPUT') {
     // IE8 input.
-    var range = document.selection.createRange();
+    let range = document.selection.createRange();
     // There can only be one selection per document in IE, so it must
     // be in our element.
     if (range.parentElement() === input) {
@@ -54,12 +54,12 @@ export function getSelection(input) {
   } else {
     throw 'Browser or element not supported';
   }
-  return selection || {start: 0, end: 0};
+  return selection || { start: 0, end: 0 };
 }
 
 export function setSelection(input, offsets) {
-  var start = offsets.start;
-  var end = offsets.end;
+  let { start, end } = offsets;
+
   if (typeof end === 'undefined') {
     end = start;
   }
@@ -67,7 +67,7 @@ export function setSelection(input, offsets) {
     input.selectionStart = start;
     input.selectionEnd = Math.min(end, input.value.length);
   } else if (document.selection && input.nodeName === 'INPUT') {
-    var range = input.createTextRange();
+    let range = input.createTextRange();
     range.collapse(true);
     range.moveStart('character', start);
     range.moveEnd('character', end - start);

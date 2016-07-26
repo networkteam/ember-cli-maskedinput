@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { Controller, A } = Ember;
+
+export default Controller.extend({
   value0: null,
   value1: null,
   pattern: '11:11',
 
-  value0Changes: Ember.A(),
+  value0Changes: A(),
 
   actions: {
     value0Changed(e) {
