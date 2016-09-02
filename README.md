@@ -6,7 +6,7 @@ There are **no dependencies on jQuery plugins** so this addon is a more lightwei
 
 ## Installation
 
-```
+``` sh
 ember install ember-cli-maskedinput
 ```
 
@@ -14,13 +14,13 @@ ember install ember-cli-maskedinput
 
 **Date pattern with bound value**
 
-```
+``` hbs
 {{masked-input mask='11/11/1111' value=myBoundValue}}
 ```
 
 **Credit card pattern with closure action**
 
-```
+``` hbs
 {{masked-input mask='1111 1111 1111 1111' on-change=(action (mut value1) value='target.value')}}
 ```
 
@@ -28,7 +28,7 @@ ember install ember-cli-maskedinput
 
 Uses plain HTML5 validation.
 
-```
+``` hbs
 {{masked-input mask='11:11:11' required=true pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS'}}
 ```
 
