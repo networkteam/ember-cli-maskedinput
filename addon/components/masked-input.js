@@ -22,7 +22,7 @@ export default Ember.TextField.extend({
   formatCharacters: null,
   placeholderChar: '_',
 
-  'on-change': Ember.K,
+  'on-change'() {},
 
   validateAttrs: Ember.on('init', function() {
     PROTECTED_ATTRS.forEach((key) => {
