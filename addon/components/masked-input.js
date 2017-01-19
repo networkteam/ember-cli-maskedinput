@@ -145,7 +145,8 @@ export default TextField.extend({
   keyPress(e) {
     // Ignore modified key presses
     // Ignore enter key to allow form submission
-    if (e.metaKey || e.altKey || e.ctrlKey || e.keyCode === 13) {
+    // Ignore tab key to allow focussing other elements
+    if (e.metaKey || e.altKey || e.ctrlKey || e.keyCode === 13 || e.keyCode === 9) {
       return;
     }
 
