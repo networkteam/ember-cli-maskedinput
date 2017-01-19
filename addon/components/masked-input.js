@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import InputMask from 'inputmask-core';
-
 import { getSelection, setSelection } from '../util/selection';
+
+const { computed, TextField, run: { next } } = Ember;
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;
@@ -17,14 +18,17 @@ function isRedo(e) {
 
 const PROTECTED_ATTRS = ['change', 'keyDown', 'keyPress', 'paste'];
 
-export default Ember.TextField.extend({
+export default TextField.extend({
   mask: null,
   formatCharacters: null,
   placeholderChar: '_',
 
-  'on-change': Ember.K,
+  'on-change'() {
+    return this;
+  },
 
-  validateAttrs: Ember.on('init', function() {
+  init() {
+    this._super(...arguments);
     PROTECTED_ATTRS.forEach((key) => {
       if (this.attrs[key]) {
         if (console && console.warn) {
@@ -32,69 +36,70 @@ export default Ember.TextField.extend({
         }
       }
     });
-  }),
+  },
 
-  applyMaskToInitialValue: Ember.on('didInsertElement', function() {
-    const el = this.get('element');
+  didInsertElement() {
+    this._super(...arguments);
+    let el = this.get('element');
     el.value = this._getDisplayValue();
-  }),
+  },
 
-  _inputMask: Ember.computed('mask', 'value', 'formatCharacters', 'placeholderChar', function() {
+  _inputMask: computed('mask', 'value', 'formatCharacters', 'placeholderChar', function() {
     let options = {
       pattern: this.get('mask'),
       value: this.get('value'),
       formatCharacters: this.get('formatCharacters')
     };
-    const placeholderChar = this.get('placeholderChar');
+    let placeholderChar = this.get('placeholderChar');
     if (placeholderChar) {
       options.placeholderChar = placeholderChar;
     }
     return new InputMask(options);
   }),
 
-  maxlength: Ember.computed('mask', function() {
-    const pattern = this.get('mask') || '';
+  maxlength: computed('mask', function() {
+    let pattern = this.get('mask') || '';
     return pattern.length;
   }),
 
-  placeholder: Ember.computed('_inputMask', function() {
+  placeholder: computed('_inputMask', function() {
     return this.get('_inputMask').emptyValue;
   }),
 
-  size: Ember.computed('mask', function() {
-    const pattern = this.get('mask') || '';
+  size: computed('mask', function() {
+    let pattern = this.get('mask') || '';
     return pattern.length;
   }),
 
   _updateMaskSelection() {
-    const el = this.get('element');
+    let el = this.get('element');
     this.get('_inputMask').selection = getSelection(el);
   },
 
   _updateInputSelection() {
-    const el = this.get('element');
-    const mask = this.get('_inputMask');
-    setSelection(el, mask.selection)
+    let el = this.get('element');
+    let mask = this.get('_inputMask');
+    setSelection(el, mask.selection);
   },
 
   _getDisplayValue() {
-    const mask = this.get('_inputMask');
-    const value = mask.getValue();
+    let mask = this.get('_inputMask');
+    let value = mask.getValue();
     return value === mask.emptyValue ? '' : value;
   },
 
   change(e) {
-    const mask = this.get('_inputMask');
-    const maskValue = mask.getValue()
+    let mask = this.get('_inputMask');
+    let maskValue = mask.getValue();
     if (e.target.value !== maskValue) {
       // Cut or delete operations will have shortened the value
       if (e.target.value.length < maskValue.length) {
-        const sizeDiff = maskValue.length - e.target.value.length;
+        let sizeDiff = maskValue.length - e.target.value.length;
         this._updateMaskSelection();
         mask.selection.end = mask.selection.start + sizeDiff;
         mask.backspace();
       }
-      const value = this._getDisplayValue();
+      let value = this._getDisplayValue();
       e.target.value = value;
       if (value) {
         this._updateInputSelection();
@@ -104,7 +109,7 @@ export default Ember.TextField.extend({
   },
 
   keyDown(e) {
-    const mask = this.get('_inputMask');
+    let mask = this.get('_inputMask');
     if (isUndo(e)) {
       e.preventDefault();
       if (mask.undo()) {
@@ -113,8 +118,7 @@ export default Ember.TextField.extend({
         this.get('on-change')(e);
       }
       return;
-    }
-    else if (isRedo(e)) {
+    } else if (isRedo(e)) {
       e.preventDefault();
       if (mask.redo()) {
         e.target.value = this._getDisplayValue();
@@ -128,7 +132,7 @@ export default Ember.TextField.extend({
       e.preventDefault();
       this._updateMaskSelection();
       if (mask.backspace()) {
-        var value = this._getDisplayValue();
+        let value = this._getDisplayValue();
         e.target.value = value;
         if (value) {
           this._updateInputSelection();
@@ -147,7 +151,7 @@ export default Ember.TextField.extend({
 
     e.preventDefault();
     this._updateMaskSelection();
-    const mask = this.get('_inputMask');
+    let mask = this.get('_inputMask');
     let key = String.fromCharCode(e.charCode);
     if (mask.input(key)) {
       e.target.value = mask.getValue();
@@ -160,11 +164,11 @@ export default Ember.TextField.extend({
     e.preventDefault();
     this._updateMaskSelection();
     // getData value needed for IE also works in FF & Chrome
-    const mask = this.get('_inputMask');
+    let mask = this.get('_inputMask');
     if (mask.paste(e.originalEvent.clipboardData.getData('Text'))) {
       e.target.value = mask.getValue();
       // Timeout needed for IE
-      Ember.run.next(this, this._updateInputSelection);
+      next(this, this._updateInputSelection);
       this.get('on-change')(e);
     }
   }
