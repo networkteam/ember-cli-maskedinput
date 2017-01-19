@@ -1,4 +1,8 @@
-# Ember masked-input [![Build Status](https://travis-ci.org/networkteam/ember-cli-maskedinput.svg?branch=master)](https://travis-ci.org/networkteam/ember-cli-maskedinput)
+[![Build Status](https://travis-ci.org/networkteam/ember-cli-maskedinput.svg?branch=master)](https://travis-ci.org/networkteam/ember-cli-maskedinput)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-maskedinput.svg)](https://emberobserver.com/addons/ember-cli-maskedinput)
+[![npm version](https://badge.fury.io/js/ember-cli-maskedinput.svg)](https://badge.fury.io/js/ember-cli-maskedinput)
+
+# Ember masked-input
 
 This addon provides a `{{masked-input}}` helper that extends `{{input}}` (`Ember.TextField`) and applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
 
