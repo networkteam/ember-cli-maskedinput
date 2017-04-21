@@ -146,7 +146,8 @@ export default TextField.extend({
     // Ignore modified key presses
     // Ignore enter key to allow form submission
     // Ignore tab key to allow focussing other elements
-    if (e.metaKey || e.altKey || e.ctrlKey || e.keyCode === 13 || e.keyCode === 9) {
+    // On Firefox, ignore any key if input is readonly
+    if (e.metaKey || e.altKey || e.ctrlKey || e.keyCode === 13 || e.keyCode === 9 || this.get('readonly')) {
       return;
     }
 
@@ -162,6 +163,10 @@ export default TextField.extend({
   },
 
   paste(e) {
+    // On Firefox, ignore paste if input is readonly
+    if (this.get('readonly')) {
+      return;
+    }
     e.preventDefault();
     this._updateMaskSelection();
     // getData value needed for IE also works in FF & Chrome
