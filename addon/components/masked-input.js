@@ -109,6 +109,10 @@ export default TextField.extend({
   },
 
   keyDown(e) {
+    // On Firefox, ignore any key if input is readonly
+    if (this.get('readonly')) {
+      return;
+    }
     let mask = this.get('_inputMask');
     if (isUndo(e)) {
       e.preventDefault();
