@@ -175,7 +175,8 @@ export default TextField.extend({
     this._updateMaskSelection();
     // getData value needed for IE also works in FF & Chrome
     let mask = this.get('_inputMask');
-    if (mask.paste(e.originalEvent.clipboardData.getData('Text'))) {
+    const clipboardData = e.originalEvent.clipboardData || window.clipboardData;
+    if (mask.paste(clipboardData.getData('Text'))) {
       e.target.value = mask.getValue();
       // Timeout needed for IE
       next(this, this._updateInputSelection);
