@@ -1,8 +1,9 @@
-import Ember from 'ember';
+/* eslint-disable no-console, ember/no-attrs-in-components */
+import { computed } from '@ember/object';
+import TextField from '@ember/component/text-field';
+import { next } from '@ember/runloop';
 import InputMask from 'inputmask-core';
 import { getSelection, setSelection } from '../util/selection';
-
-const { computed, TextField, run: { next } } = Ember;
 
 const KEYCODE_Z = 90;
 const KEYCODE_Y = 89;

@@ -1,4 +1,3 @@
-/* jshint node: true */
 'use strict';
 var p = require('path');
 var templatePath = p.resolve(__dirname + '/assets/module-template.js.t');
@@ -19,11 +18,11 @@ function expand(input) {
 module.exports = {
   name: 'ember-cli-maskedinput',
 
-  treeForVendor: function(tree) {
+  treeForVendor: function() {
     var modulePath = require.resolve('inputmask-core');
     var expandedModulePath = expand(modulePath);
 
-    var inputmaskCore = rename(find(expandedModulePath), function(path) {
+    var inputmaskCore = rename(find(expandedModulePath), function() {
       return 'inputmask-core/index.js'
     });
 
