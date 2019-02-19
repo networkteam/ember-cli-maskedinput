@@ -19,7 +19,7 @@ module('Integration | Component | masked input', function(hooks) {
     assert.equal(find('input').getAttribute('size'), 5);
   });
 
-  test('it sets a placholder from InputMask', async function(assert) {
+  test('it sets a placeholder from InputMask', async function(assert) {
     await render(hbs`{{masked-input mask='11:11'}}`);
 
     assert.equal(find('input').getAttribute('placeholder'), '__:__');
