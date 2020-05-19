@@ -8,6 +8,14 @@ This addon provides a `{{masked-input}}` helper that extends `{{input}}` (`Ember
 
 There are **no dependencies on jQuery plugins** so this addon is a more lightweight and faster alternative to other input masking addons. It's based on the solid [inputmask-core](https://github.com/insin/inputmask-core) library and adapted from its React implementation [MaskedInput](https://github.com/insin/react-maskedinput).
 
+ 
+## Compatibility
+ 
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
 ## Installation
 
 ``` sh
