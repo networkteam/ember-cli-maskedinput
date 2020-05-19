@@ -1,0 +1,12 @@
+<input
+  {{ref this "inputEl"}}
+  ...attributes
+  value={{this.displayValue}}
+  placeholder={{this.placeholder}}
+  maxlength={{this.maxlength}}
+  size={{this.size}}
+  {{on 'keydown' (fn this.onInputKeyDown)}}
+  {{on 'keypress' (fn this.onInputKeyPress)}}
+  {{on 'change' (fn this.onInputChange)}}
+  {{on 'paste' (fn this.onInputPaste)}}
+/>

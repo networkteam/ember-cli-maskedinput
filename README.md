@@ -4,14 +4,14 @@
 
 # Ember masked-input
 
-This addon provides a `<MaskedInput>` component that applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
+This addon provides a `<MaskedInput>` Glimmer component that applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
 
 There are **no dependencies on jQuery plugins** so this addon is a more lightweight and faster alternative to other input masking addons. It's based on the solid [inputmask-core](https://github.com/insin/inputmask-core) library and adapted from its React implementation [MaskedInput](https://github.com/insin/react-maskedinput).
 
 
 ## Compatibility
 
-* Ember.js v3.12 or above
+* Ember.js v3.13 or above
 * Ember CLI v2.13 or above
 * Node.js v10 or above
 
@@ -45,7 +45,6 @@ export default class MyComponent extends Component {
   }
 }
 ```
-
 
 **Date pattern**
 
