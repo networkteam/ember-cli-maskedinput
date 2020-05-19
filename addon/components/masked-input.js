@@ -158,8 +158,8 @@ export default TextField.extend({
 
     e.preventDefault();
     this._updateMaskSelection();
-    let mask = this.get('_inputMask');
-    let key = String.fromCharCode(e.charCode);
+    const mask = this.get('_inputMask');
+    const key = e.key || String.fromCharCode(e.charCode);
     if (mask.input(key)) {
       e.target.value = mask.getValue();
       this._updateInputSelection();
@@ -175,9 +175,11 @@ export default TextField.extend({
     e.preventDefault();
     this._updateMaskSelection();
     // getData value needed for IE also works in FF & Chrome
-    let mask = this.get('_inputMask');
-    let clipboardData = e.originalEvent.clipboardData || window.clipboardData;
-    if (mask.paste(clipboardData.getData('Text'))) {
+    const mask = this.get('_inputMask');
+    const clipboardData = e.clipboardData || window.clipboardData;
+    const text = clipboardData.getData('Text');
+    const acceptsPaste = mask.paste(text);
+    if (acceptsPaste) {
       e.target.value = mask.getValue();
       // Timeout needed for IE
       next(this, this._updateInputSelection);

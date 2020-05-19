@@ -4,13 +4,13 @@
 
 # Ember masked-input
 
-This addon provides a `{{masked-input}}` helper that extends `{{input}}` (`Ember.TextField`) and applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
+This addon provides a `<MaskedInput>` component that applies input masking based on [inputmask-core](https://github.com/insin/inputmask-core).
 
 There are **no dependencies on jQuery plugins** so this addon is a more lightweight and faster alternative to other input masking addons. It's based on the solid [inputmask-core](https://github.com/insin/inputmask-core) library and adapted from its React implementation [MaskedInput](https://github.com/insin/react-maskedinput).
 
- 
+
 ## Compatibility
- 
+
 * Ember.js v3.12 or above
 * Ember CLI v2.13 or above
 * Node.js v10 or above
@@ -24,24 +24,47 @@ ember install ember-cli-maskedinput
 
 ## Usage
 
-**Date pattern with bound value**
+**Basic usage**
+
+Pass the value to display and a `on-change` function as args to the `MaskedInput` component:
 
 ``` hbs
-{{masked-input mask='11/11/1111' value=myBoundValue}}
+<MaskedInput @mask='A1111' @value={{this.myValue}} @on-change={{fn this.updateMyValue}} />
 ```
 
-**Credit card pattern with closure action**
+```js
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+
+export default class MyComponent extends Component {
+  @tracked myValue = 0;
+
+  @action
+  updateMyValue(e) {
+    this.myValue = e.target.value;
+  }
+}
+```
+
+
+**Date pattern**
 
 ``` hbs
-{{masked-input mask='1111 1111 1111 1111' on-change=(action (mut value1) value='target.value')}}
+<MaskedInput @mask='11/11/1111' @value={{this.myValue}} @on-change={{fn this.updateMyValue}} />
+```
+
+**Credit card pattern**
+
+``` hbs
+<MaskedInput @mask='1111 1111 1111 1111' @value={{this.myValue}} @on-change={{fn this.updateMyValue}} />
 ```
 
 **Time pattern with validation**
 
-Uses plain HTML5 validation.
+Uses plain HTML5 validation by setting HTML attributes:
 
 ``` hbs
-{{masked-input mask='11:11:11' required=true pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS'}}
+<MaskedInput @mask='11:11:11' required pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS' />
 ```
 
 ## Reference
@@ -62,8 +85,7 @@ The character which is used to fill in editable positions that have no input. De
 
 ### `on-change`
 
-An optional action closure to handle the `change` event (which should not be overridden).
-
+An optional function to handle `change` events.
 
 ## License
 

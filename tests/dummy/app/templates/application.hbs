@@ -3,48 +3,50 @@
 <h3>Event Example</h3>
 
 <pre>
-  &#123;&#123;masked-input mask='{{pattern}}' value=someValue on-change=(action 'valueChanged')&#125;&#125;
+  &lt;MaskedInput @mask='{{this.pattern}}' @value=&#123;&#123;this.value&#125;&#125; @on-change=&#123;&#123;fn this.valueChanged&#125;&#125; /&gt;
 </pre>
 
 <h4>Pattern:</h4>
 
-<pre>{{input value=pattern}}</pre>
+<pre>
+<input value={{this.pattern}} {{on 'change' this.updatePattern}} />
+</pre>
 
 <h4>Input:</h4>
 
-{{masked-input mask=pattern value=value0 on-change=(action 'value0Changed')}}
+<MaskedInput @mask={{this.pattern}} @value={{this.value0}} @on-change={{fn this.value0Changed}} />
 
 <h4>Bound Value:</h4>
 
-<pre>{{value0}}</pre>
+<pre>{{this.value0}}</pre>
 
 <h4>Changes:</h4>
 
 <ul>
-{{#each value0Changes as |change|}}
+{{#each this.value0Changes as |change|}}
   <li><pre>{{change}}</pre></li>
 {{/each}}
 </ul>
 
 <h3>Credit card example</h3>
 
-{{masked-input mask='1111 1111 1111 1111' on-change=(action (mut value1) value='target.value')}}
+<MaskedInput @mask='1111 1111 1111 1111' @value={{this.value1}} @on-change={{fn this.value1Changed}} />
 
-<pre>{{value1}}</pre>
+<pre>{{this.value1}}</pre>
 
 <h3>Escaped pattern example</h3>
 
-{{masked-input mask='\A11 \1AA \111 \Aaa'}}
+<MaskedInput @mask='\A11 \1AA \111 \Aaa' />
 
 <h3>Validation example</h3>
 
 <form>
-{{masked-input mask='11:11:11' required=true pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS'}}
+<MaskedInput @mask='11:11:11' required pattern='[0-9]{2}:[0-9]{2}:[0-9]{2}' title='Time value with format HH:MM:SS' />
 <button type="submit">Send</button>
 </form>
 
 <h3>Initial value example</h3>
 
-{{masked-input mask='11:11' value='2222'}}
+<MaskedInput @mask='11:11' @value='2222' />
 
 {{outlet}}

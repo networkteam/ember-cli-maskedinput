@@ -1,18 +1,36 @@
 import Controller from '@ember/controller';
-import { A } from '@ember/array';
+import { action } from '@ember/object';
+import { tracked } from "@glimmer/tracking";
 
-export default Controller.extend({
-  value0: null,
-  value1: null,
-  pattern: '11:11',
+export default class ApplicationController extends Controller {
+  @tracked
+  value0 = null;
+  @tracked
+  value1 = null;
+  @tracked
+  pattern = '11:11';
 
-  value0Changes: A(),
+  @tracked
+  value0Changes = [];
 
-  actions: {
-    value0Changed(e) {
-      let changes = this.get('value0Changes');
-      changes.pushObject(e.target.value);
-      this.set('value0Changes', changes);
-    }
+  @action
+  updatePattern(e) {
+    this.pattern = e.target.value;
   }
-});
+
+  @action
+  value0Changed(e) {
+    const value = e.target.value;
+    this.value0 = value;
+    this.value0Changes = [
+      ...this.value0Changes,
+      value
+    ];
+  }
+
+  @action
+  value1Changed(e) {
+    const value = e.target.value;
+    this.value1 = value;
+  }
+}
