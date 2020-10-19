@@ -74,13 +74,6 @@ export default class MaskedInputComponent extends Component {
   onInputChange(e) {
     const maskValue = this.inputMask.getValue();
     if (e.target.value !== maskValue) {
-      // Cut or delete operations will have shortened the value
-      if (e.target.value.length < maskValue.length) {
-        const sizeDiff = maskValue.length - e.target.value.length;
-        this.updateMaskSelection();
-        this.inputMask.selection.end = this.inputMask.selection.start + sizeDiff;
-        this.inputMask.backspace();
-      }
       const value = this.displayValue;
       e.target.value = value;
       if (value) {
