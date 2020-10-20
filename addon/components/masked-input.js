@@ -58,10 +58,6 @@ export default class MaskedInputComponent extends Component {
     return this.pattern.length;
   }
 
-  get placeholder() {
-    return this.inputMask.emptyValue;
-  }
-
   get readonly() {
     return this.inputEl.readOnly;
   }
