@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-maskedinput",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight masked input fields without jQuery based on inputmask-core",
   "keywords": [
     "ember-addon",
