@@ -27,7 +27,7 @@
     "ember-auto-import": "^1.5.3",
     "ember-cli-babel": "^7.17.2",
     "ember-cli-htmlbars": "^4.2.2",
-    "ember-ref-modifier": "^1.0.0",
+    "ember-ref-bucket": "^4.1.0",
     "inputmask-core": "^2.1.1"
   },
   "devDependencies": {
