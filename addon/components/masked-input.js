@@ -2,7 +2,7 @@ import Component from "@glimmer/component";
 import { action } from "@ember/object";
 import { computed } from '@ember/object';
 import { next } from '@ember/runloop';
-
+import { ref } from 'ember-ref-bucket';
 import InputMask from 'inputmask-core';
 
 import { getSelection, setSelection } from '../util/selection';
@@ -23,9 +23,10 @@ const NOOP = function(){};
 
 export default class MaskedInputComponent extends Component {
   // Reference to the input element
-  inputEl = null;
+ // inputEl = null;
+ @ref("inputEl") inputEl;
 
-  // Dunno why tracking a getter doesn't work here - needs explicit arg dependencies to update correctly
+  // Dunno why tracking a getter doesn't work here - needs explicit arg dependencies to update correctly.
   // Do not add value as dependency, since the input mask value will be set by the according actions.
   @computed('args.{mask,formatCharacters,placeholderChar}')
   get inputMask() {
