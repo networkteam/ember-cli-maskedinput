@@ -75,6 +75,7 @@ export default class MaskedInputComponent extends Component {
   onInputChange(e) {
     const maskValue = this.inputMask.getValue();
     if (e.target.value !== maskValue) {
+      this.inputMask.setValue(e.target.value);
       // Cut or delete operations will have shortened the value
       if (e.target.value.length < maskValue.length) {
         const sizeDiff = maskValue.length - e.target.value.length;
@@ -138,15 +139,8 @@ export default class MaskedInputComponent extends Component {
     if (e.metaKey || e.altKey || e.ctrlKey || e.keyCode === 13 || e.keyCode === 9 || this.readonly) {
       return;
     }
-
-    e.preventDefault();
-    this.updateMaskSelection();
     const key = e.key || String.fromCharCode(e.charCode);
-    if (this.inputMask.input(key)) {
-      e.target.value = this.inputMask.getValue();
-      this.updateInputSelection();
-      this.onChange(e);
-    }
+    this.handleCharInput(e, key)
   }
 
   @action
@@ -167,6 +161,22 @@ export default class MaskedInputComponent extends Component {
       next(this, this.updateInputSelection);
       this.onChange(e);
     }
+  }
+
+  @action
+  handleCharInput(evt, key) {
+    evt.preventDefault();
+    this.updateMaskSelection();
+    if (this.inputMask.input(key)) {
+      evt.target.value = this.inputMask.getValue();
+      this.updateInputSelection();
+      this.onChange(evt);
+    }
+  }
+
+  @action
+  onInputBeforeInput(evt) {
+    this.handleCharInput(evt, evt.data);
   }
 
   updateMaskSelection() {
